@@ -17,17 +17,17 @@ namespace HW05
         static void Main(string[] args)
         {
             // Experiment A
-            Console.WriteLine("Running experiment A (" + ExperimentASamples +  " runs)\n");
+            Console.WriteLine("Running experiment A (" + ExperimentASamples +  " samples)\n");
             bool experimentAResult = RunExperiment(ExperimentASamples);
             Console.WriteLine("Experiment A Results:\nIs A the majority? " + experimentAResult);
 
             // Experiment B
-            Console.WriteLine("Running experiment B (" + ExperimentBSamples + " runs)\n");
+            Console.WriteLine("Running experiment B (" + ExperimentBSamples + " samples)\n");
             bool experimentBResult = RunExperiment(ExperimentBSamples);
             Console.WriteLine("Experiment B Results: " + experimentBResult);
 
             // Experiment C
-            Console.WriteLine("Running experiment C (" + ExperimentCSamples + " runs)\n");
+            Console.WriteLine("Running experiment C (" + ExperimentCSamples + " samples)\n");
             bool experimentCResult = RunExperiment(ExperimentCSamples);
             Console.WriteLine("Experiment C Results: " + experimentCResult);
 
@@ -42,10 +42,12 @@ namespace HW05
         /// <returns>Returns true if A voters were the majority more than B voters out of the 100 runs, else returns false</returns>
         private static bool RunExperiment(int numSamples)
         {
+            Random rand = new Random();
+
             int aMajCount = 0, bMajCount = 0;
             for (int i = 0; i < NumRuns; ++i)
             {
-                Results expResult = GetSamples(numSamples);
+                Results expResult = GetSamples(numSamples, rand);
 
                 // Increment proper majority count, ignore ties
                 if (expResult == Results.AMajority)
@@ -73,9 +75,8 @@ namespace HW05
         /// </summary>
         /// <param name="numSamples">Number of samples to collect</param>
         /// <returns>Returns Enum to record if A voters or B voters had majority or a tie occured</returns>
-        private static Results GetSamples(int numSamples)
+        private static Results GetSamples(int numSamples, Random rand)
         {
-            Random rand = new Random();
             int aCount = 0, bCount = 0;
 
             // Collect samples
