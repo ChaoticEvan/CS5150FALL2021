@@ -8,36 +8,81 @@ namespace HW05
 {
     class Program
     {
-        private const int prob = 52;
+        private const int Prob = 52;
+        private const int ExperimentASamples = 20;
+        private const int ExperimentBSamples = 100;
+        private const int ExperimentCSamples = 400;
+        private const int NumRuns = 100;
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Running experiment A (20 runs)\n");
-            Results expAResult = RunExperiment(20);
-            Console.WriteLine("Experiment A Results: " + expAResult.ToString());
+            // Experiment A
+            Console.WriteLine("Running experiment A (" + ExperimentASamples +  " runs)\n");
+            bool experimentAResult = RunExperiment(ExperimentASamples);
+            Console.WriteLine("Experiment A Results:\nIs A the majority? " + experimentAResult);
 
+            // Experiment B
+            Console.WriteLine("Running experiment B (" + ExperimentBSamples + " runs)\n");
+            bool experimentBResult = RunExperiment(ExperimentBSamples);
+            Console.WriteLine("Experiment B Results: " + experimentBResult);
 
-            Console.WriteLine("Running experiment B (100 runs)\n");
-            Results expBResult = RunExperiment(100);
-            Console.WriteLine("Experiment B Results: " + expBResult.ToString());
-
-            Console.WriteLine("Running experiment C (400 runs)\n");
-            Results expCResult = RunExperiment(400);
-            Console.WriteLine("Experiment C Results: " + expCResult.ToString());
+            // Experiment C
+            Console.WriteLine("Running experiment C (" + ExperimentCSamples + " runs)\n");
+            bool experimentCResult = RunExperiment(ExperimentCSamples);
+            Console.WriteLine("Experiment C Results: " + experimentCResult);
 
             Console.WriteLine("Press enter to exit...");
             Console.ReadLine();
         }
 
-        private static Results RunExperiment(int numRuns)
+        /// <summary>
+        /// Helper method to collect the # of samples and record the majority 100 times (as per the instructions)
+        /// </summary>
+        /// <param name="numSamples">Number of samples to collect from the "voters"</param>
+        /// <returns>Returns true if A voters were the majority more than B voters out of the 100 runs, else returns false</returns>
+        private static bool RunExperiment(int numSamples)
+        {
+            int aMajCount = 0, bMajCount = 0;
+            for (int i = 0; i < NumRuns; ++i)
+            {
+                Results expResult = GetSamples(numSamples);
+
+                // Increment proper majority count, ignore ties
+                if (expResult == Results.AMajority)
+                {
+                    aMajCount++;
+                }
+                else if (expResult == Results.BMajority)
+                {
+                    bMajCount++;
+                }
+            }
+
+
+            Console.WriteLine("A Majority Count: " + aMajCount);
+            Console.WriteLine("B Majority Count: " + bMajCount);
+
+            // This ignores the case where they are equal majority counts, but
+            // this edge case won't happen extremely often given the number of
+            // samples and how many runs we are doing
+            return aMajCount > bMajCount;
+        }
+
+        /// <summary>
+        /// Helper method to collect samples from the "list of voters"
+        /// </summary>
+        /// <param name="numSamples">Number of samples to collect</param>
+        /// <returns>Returns Enum to record if A voters or B voters had majority or a tie occured</returns>
+        private static Results GetSamples(int numSamples)
         {
             Random rand = new Random();
             int aCount = 0, bCount = 0;
 
-            for (int i = 0; i < numRuns; ++i)
+            // Collect samples
+            for (int i = 0; i < numSamples; ++i)
             {
                 int voter = rand.Next(100);
-                bool didVoteA = voter <= prob;
+                bool didVoteA = voter <= Prob;
 
                 if (didVoteA)
                 {
@@ -49,6 +94,7 @@ namespace HW05
                 }
             }
 
+            // Record majority results
             Results res;
             if (aCount > bCount)
             {
