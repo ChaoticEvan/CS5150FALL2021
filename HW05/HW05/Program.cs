@@ -31,7 +31,7 @@ namespace HW05
             bool experimentCResult = RunExperiment(ExperimentCSamples);
             Console.WriteLine("Experiment C Results: " + experimentCResult);
 
-            Console.WriteLine("Press enter to exit...");
+            Console.Write("Press enter to exit...");
             Console.ReadLine();
         }
 
