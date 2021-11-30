@@ -12,18 +12,20 @@ namespace HW05
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Running experiment A (20 runs)");
+            Console.WriteLine("Running experiment A (20 runs)\n");
             Results expAResult = RunExperiment(20);
-            Console.WriteLine("Done...");
+            Console.WriteLine("Experiment A Results: " + expAResult.ToString());
 
-            Console.WriteLine("Running experiment B (100 runs)");
+
+            Console.WriteLine("Running experiment B (100 runs)\n");
             Results expBResult = RunExperiment(100);
-            Console.WriteLine("Done...");
+            Console.WriteLine("Experiment B Results: " + expBResult.ToString());
 
-            Console.WriteLine("Running experiment C (400 runs)");
+            Console.WriteLine("Running experiment C (400 runs)\n");
             Results expCResult = RunExperiment(400);
-            Console.WriteLine("Done...");
+            Console.WriteLine("Experiment C Results: " + expCResult.ToString());
 
+            Console.WriteLine("Press enter to exit...");
             Console.ReadLine();
         }
 
