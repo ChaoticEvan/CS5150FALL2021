@@ -12,24 +12,30 @@ namespace HW05
         private const int ExperimentASamples = 20;
         private const int ExperimentBSamples = 100;
         private const int ExperimentCSamples = 400;
+        private const int ExperimentDSamples = 475;
         private const int NumRuns = 100;
 
         static void Main(string[] args)
         {
             // Experiment A
-            Console.WriteLine("Running experiment A (" + ExperimentASamples +  " samples)\n");
+            Console.WriteLine("Running experiment A (" + ExperimentASamples + " samples)");
             bool experimentAResult = RunExperiment(ExperimentASamples);
-            Console.WriteLine("Experiment A Results:\nIs A the majority? " + experimentAResult);
+            Console.WriteLine("Experiment A Results:\nIs A the majority? " + experimentAResult + "\n");
 
             // Experiment B
-            Console.WriteLine("Running experiment B (" + ExperimentBSamples + " samples)\n");
+            Console.WriteLine("Running experiment B (" + ExperimentBSamples + " samples)");
             bool experimentBResult = RunExperiment(ExperimentBSamples);
-            Console.WriteLine("Experiment B Results: " + experimentBResult);
+            Console.WriteLine("Experiment B Results:\nIs A the majority? " + experimentBResult + "\n");
 
             // Experiment C
-            Console.WriteLine("Running experiment C (" + ExperimentCSamples + " samples)\n");
+            Console.WriteLine("Running experiment C (" + ExperimentCSamples + " samples)");
             bool experimentCResult = RunExperiment(ExperimentCSamples);
-            Console.WriteLine("Experiment C Results: " + experimentCResult);
+            Console.WriteLine("Experiment C Results:\nIs A the majority? " + experimentCResult + "\n");
+
+            // Experiment D
+            Console.WriteLine("Running experiment D (" + ExperimentDSamples + " samples)");
+            bool experimentDResult = RunExperiment(ExperimentDSamples);
+            Console.WriteLine("Experiment D Results:\nIs A the majority? " + experimentDResult + "\n");
 
             Console.Write("Press enter to exit...");
             Console.ReadLine();
